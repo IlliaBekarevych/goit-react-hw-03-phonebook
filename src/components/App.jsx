@@ -13,7 +13,31 @@ class App extends Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    const contacts = JSON.parse(localStorage.getItem('contacts'));
+    contacts && this.setState({ contacts });
+  }
+
+  componentDidUpdate(prevState) {
+    const nextState = this.state.contacts;
+    if (prevState.contacts !== nextState) {
+      localStorage.setItem('contacts', JSON.stringify(nextState));
+    }
+  }
+
   addContact = newContact => {
+    if (
+      this.state.contacts.find(
+        contact =>
+          contact.name.toLocaleLowerCase() ===
+          newContact.name.toLocaleLowerCase()
+      )
+    ) {
+      alert(newContact.name + ' is alredy in contacts');
+      return true;
+    }
+
     this.setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
     }));
