@@ -16,7 +16,9 @@ class App extends Component {
 
   componentDidMount() {
     const contacts = JSON.parse(localStorage.getItem('contacts'));
-    contacts && this.setState({ contacts });
+    if (contacts) {
+      this.setState({ contacts });
+    }
   }
 
   componentDidUpdate(prevState) {
@@ -30,8 +32,7 @@ class App extends Component {
     if (
       this.state.contacts.find(
         contact =>
-          contact.name.toLocaleLowerCase() ===
-          newContact.name.toLocaleLowerCase()
+          contact.name.toLowerCase() === newContact.name.toLocaleLowerCase()
       )
     ) {
       alert(newContact.name + ' is alredy in contacts');
