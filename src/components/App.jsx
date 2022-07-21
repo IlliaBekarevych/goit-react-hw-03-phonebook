@@ -32,7 +32,7 @@ class App extends Component {
     if (
       this.state.contacts.find(
         contact =>
-          contact.name.toLowerCase() === newContact.name.toLocaleLowerCase()
+          contact.name.toLowerCase() === newContact.name.toLowerCase()
       )
     ) {
       alert(newContact.name + ' is alredy in contacts');
